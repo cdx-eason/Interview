@@ -65,4 +65,4 @@ class Config ():
     @staticmethod
     def readdnserror():
         with open('./results/DNSLIST_ERROR_' + Config.st) as dnserror:
-            return '\nHOST|Status|Comment\n' + dnserror.read()
+            return '\nHOST|Status|Comment|DNS\n' + dnserror.read()

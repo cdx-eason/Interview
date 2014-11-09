@@ -56,6 +56,9 @@ Set Query request headers (If needed)
 Set Query request data (If needed)
 # Format [key]=[value] e.g. q=select * from yahoo.finance.quotes where symbol in ("YHOO")
 
+Set DNS server list
+# List all DNS servers. e.g. 8.8.8.8
+
 Run Test
 --------
 python checkDNSstatus.py
@@ -67,12 +70,15 @@ If successfully retrieve a valid json form query service, or run with the sample
     DNSLIST_ERROR_[datetime]    # Contain error host list and status
 
 Head for both file
-HOST|Status|Comment
-  │     │      └── Unexpected CNAME resolve or short error description
-  │     └───────── Host resolve status [False, True]
-  └─────────────── Host name
-2-01-0x3035-0x2.cdx.cedexis.net|True|www.customer.com1
-2-01-0x3036-0x2.cdx.cedexis.net|False|www.customer.com1
+HOST|Status|Comment|DNS
+  │     │      │     └─── DNS server
+  │     │      └───────── Unexpected CNAME resolve or short error description
+  │     └──────────────── Host resolve status [False, True]
+  └────────────────────── Host name
+2-01-0x3035-0x2.cdx.cedexis.net|True|www.customer.com1|8.8.8.8
+2-01-0x3035-0x2.cdx.cedexis.net|True|www.customer.com1|8.8.4.4
+2-01-0x3036-0x2.cdx.cedexis.net|False|www.customer.com1|8.8.8.8
+2-01-0x3036-0x2.cdx.cedexis.net|False|www.customer.com1|8.8.4.4
 
 Sample file name:
     DNSLIST_ALL_2014-11-08T22:42:52

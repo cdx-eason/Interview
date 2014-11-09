@@ -13,13 +13,24 @@ class BaseClass():
         self.data = None
         self.objjson = None
 
-        self.dnsserver = Config.getconfig('SERVICE_HOST')
         self.queryhost = Config.getconfig('QUERY_HOST')
         self.queryapp = Config.getconfig('QUERY_app')
         self.protocol = Config.getconfig('QUERY_PROTOCOL')
         self.body = Config.getconfig('QUERY_BODY')
         self.method = Config.getconfig('QUERY_METHOD')
         self.headers = Config.getqueryheaders()
+        self.dnsservers = self.getdnsservers()
+
+    def getdnsservers(self):
+        dnsservers = list()
+        with open('./DNSservers') as f:
+            for line in f:
+                if line.startswith('#'):
+                    pass
+                else:
+                    dnsservers.append(line.replace('\n', ''))
+        return dnsservers
+
 
     def callwithhttplib(self):
         url = self.queryhost
@@ -62,23 +73,23 @@ class BaseClass():
             return False
 
     def checkdns(self, hostname, cname):
-        actcname = self.getcname(hostname)
-        global status
-        error = ['No Answer', 'Other Error']
-        if actcname == cname:
-            if any(x in actcname for x in error):
-                status = False
+        for item in self.dnsservers:
+            dnsserver = item
+            actcname = self.getcname(hostname, dnsserver)
+            global status
+            error = ['No Answer', 'Other Error']
+            if actcname == cname:
+                if any(x in actcname for x in error):
+                    status = False
+                else:
+                    status = True
             else:
-                status = True
-        else:
-            status = False
-        if status is False:
-            self.overallstatus = False
-        Config.writednsstatustofile(hostname + '|' + str(status) + '|' + actcname + '\n', status)
+                status = False
+            if status is False:
+                self.overallstatus = False
+            Config.writednsstatustofile(hostname + '|' + str(status) + '|' + actcname + '|' + dnsserver + '\n', status)
 
-    def getcname(self, hostname):
-        dnsserver = self.dnsserver
-
+    def getcname(self, hostname, dnsserver):
         my_resolver = dns.resolver.Resolver()
         my_resolver.nameservers = [dnsserver]
 
