@@ -5,7 +5,7 @@ import time
 import datetime
 
 
-class Config ():
+class Config():
     config = ConfigParser.RawConfigParser()
     config.read('./system.cfg')
 

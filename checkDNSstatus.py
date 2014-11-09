@@ -19,5 +19,6 @@ class SampleTest(unittest.TestCase):
         self.assertTrue(bc.parsejson(bc.objjson), 'Invalid Json:\n' + bc.data)
         self.assertTrue(bc.overallstatus, Config.readdnserror())
 
+
 if __name__ == '__main__':
     unittest.main()

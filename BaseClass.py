@@ -46,7 +46,8 @@ class BaseClass():
         response = conn.getresponse()
         self.data = response.read()
         conn.close()
-        self.queryresponse = '\nResponse Code:\n %s %s\nResponse Header:\n %s\nResponse Message:\n %s' % (response.status, response.reason, response.getheaders(), self.data)
+        self.queryresponse = '\nResponse Code:\n %s %s\nResponse Header:\n %s\nResponse Message:\n %s' % (
+        response.status, response.reason, response.getheaders(), self.data)
         return response.status
 
     def querydatabuilder(self):
