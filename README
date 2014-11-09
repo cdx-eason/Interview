@@ -5,20 +5,6 @@ Copyright? No
 
 Files
 -----
-
-├── BaseClass.py
-├── checkDNSstatus.py
-├── Config.py
-├── Data
-├── Headers
-├── README
-├── res
-│   └── SampleJson.json
-├── results
-│   ├── DNSLIST_ALL_2014-11-08T23:36:10
-│   └── DNSLIST_ERROR_2014-11-08T23:36:10
-└── system.cfg
-
 .
 ├── BaseClass.py            BaseClass
 ├── checkDNSstatus.py       PyUnit test file
