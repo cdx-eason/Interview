@@ -1,0 +1,75 @@
+Sample DNS Test - 11/08/2014
+============================
+
+Copyright? No
+
+Files
+-----
+.
+├── BaseClass.py            BaseClass
+├── checkDNSstatus.py       PyUnit test file
+├── Config.py               cfg reader and file drivers
+├── Headers                 Query service headers
+├── README                  me
+├── res
+│   └── SampleJson.json     Sample Json response from Query service
+├── results                 test result folder, DNSLIST_ERROR_[datetime] and DNSLIST_ALL_[datetime] will be created for each run
+│   ├── DNSLIST_ALL_2014-11-08T22:42:52
+│   └── DNSLIST_ERROR_2014-11-08T22:42:52
+└── system.cfg              Service configuration
+
+
+System requirement
+------------------
+Ubuntu 14.04 with build in Python 2.7.6
+
+Addition Package
+----------------
+python-dnspython
+
+install in terminal
+sudo apt-get install python-dnspython
+
+Instruction
+-----------
+Set environment
+-system.cfg
+    Configuration for Query Service.
+    Give string value for belows (Preset with configurations for Yahoo stock api for testing)
+        query_protocol      # service protocol. [https, http]
+        query_host          # service host. e.g. query.yahooapis.com
+        query_path          # service path. e.g. /v1/public/yql
+        query_urlp          # service url parameters. e.g. ?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22YHOO%22%2C%22AAPL%22%2C%22GOOG%22%2C%22MSFT%22)%0A%09%09&format=json&diagnostics=true&env=http%3A%2F%2Fdatatables.org%2Falltables.env&callback=
+        query_method        # service method. e.g. POST, GET, PUT
+        query_body          # service request body. (If needed.)
+    Configuration for DNS server (Preset with google dns server address)
+        service_host        # DNS server address. e.g. 8.8.8.8
+    Test Json file path and name (Contain a sample json payload from requirement dec)
+        test_json_file      # Test Json file path and name. e.g. ./res/SampleJson.json
+        run_with_json_file  # Set 'yes' if want to run with test_json_file
+
+Set Query request headers (If needed)
+-Headers
+    # Format [key]: [value] e.g. Content-Type: application/json
+
+Run Test
+--------
+python checkDNSstatus.py
+
+Test Result
+-----------
+If successfully retrieve a valid json form query service, or run with the sample json file, two result files will be created.
+    DNSLIST_ALL_[datetime]      # Contain all host list and status
+    DNSLIST_ERROR_[datetime]    # Contain error host list and status
+
+Head for both file
+HOST|Status|Comment
+  │     │      └── Unexpected CNAME resolve or short error description
+  │     └───────── Host resolve status [False, True]
+  └─────────────── Host name
+2-01-0x3035-0x2.cdx.cedexis.net|True|www.customer.com1
+2-01-0x3036-0x2.cdx.cedexis.net|False|www.customer.com1
+
+Sample file name:
+    DNSLIST_ALL_2014-11-08T22:42:52
+    DNSLIST_ERROR_2014-11-08T22:42:52
