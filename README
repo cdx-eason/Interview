@@ -10,6 +10,7 @@ Files
 ├── checkDNSstatus.py       PyUnit test file
 ├── Config.py               cfg reader and file drivers
 ├── Data                    Query service data
+├── DNSservers              DNS server list
 ├── Headers                 Query service headers
 ├── README                  me
 ├── res
