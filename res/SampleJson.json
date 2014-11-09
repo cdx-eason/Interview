@@ -1,0 +1,14 @@
+[
+   {
+      "name":"Name of Customer1",
+      "cid":12341,
+      "app_id":2,
+      "cname":"www.customer.com1"
+   },
+   {
+      "name":"Name of Customer2",
+      "cid":12342,
+      "app_id":2,
+      "cname":"www.customer.com2"
+   }
+]
