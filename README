@@ -5,10 +5,25 @@ Copyright? No
 
 Files
 -----
+
+├── BaseClass.py
+├── checkDNSstatus.py
+├── Config.py
+├── Data
+├── Headers
+├── README
+├── res
+│   └── SampleJson.json
+├── results
+│   ├── DNSLIST_ALL_2014-11-08T23:36:10
+│   └── DNSLIST_ERROR_2014-11-08T23:36:10
+└── system.cfg
+
 .
 ├── BaseClass.py            BaseClass
 ├── checkDNSstatus.py       PyUnit test file
 ├── Config.py               cfg reader and file drivers
+├── Data                    Query service data
 ├── Headers                 Query service headers
 ├── README                  me
 ├── res
@@ -39,7 +54,8 @@ Set environment
         query_protocol      # service protocol. [https, http]
         query_host          # service host. e.g. query.yahooapis.com
         query_path          # service path. e.g. /v1/public/yql
-        query_urlp          # service url parameters. e.g. ?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22YHOO%22%2C%22AAPL%22%2C%22GOOG%22%2C%22MSFT%22)%0A%09%09&format=json&diagnostics=true&env=http%3A%2F%2Fdatatables.org%2Falltables.env&callback=
+        query_username      # username for query service
+        query_password      # password for query service
         query_method        # service method. e.g. POST, GET, PUT
         query_body          # service request body. (If needed.)
     Configuration for DNS server (Preset with google dns server address)
@@ -49,8 +65,10 @@ Set environment
         run_with_json_file  # Set 'yes' if want to run with test_json_file
 
 Set Query request headers (If needed)
--Headers
-    # Format [key]: [value] e.g. Content-Type: application/json
+# Format [key]: [value] e.g. Content-Type: application/json
+
+Set Query request data (If needed)
+# Format [key]=[value] e.g. q=select * from yahoo.finance.quotes where symbol in ("YHOO")
 
 Run Test
 --------

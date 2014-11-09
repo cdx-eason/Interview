@@ -1,0 +1,4 @@
+# Format [key]=[value]
+env=http://datatables.org/alltables.env
+format=json
+q=select * from yahoo.finance.quotes where symbol in ("YHOO")

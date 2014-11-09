@@ -28,7 +28,11 @@ class Config ():
     @staticmethod
     def getqueryheaders():
         headers = dict()
-        # filename = open('./Headers')
+        username = Config.getconfig('QUERY_USERNAME')
+        password = Config.getconfig('QUERY_PASSWORD')
+        if username != '' and password != '':
+            strauth = "Basic " + (username + ":" + password).encode("base64").rstrip()
+            headers['Authorization'] = strauth
         with open('./Headers') as fileheader:
             for line in fileheader:
                 if line.startswith('#'):
@@ -37,6 +41,18 @@ class Config ():
                     (key, val) = line.replace('\n', '').split(': ')
                     headers[key] = val
         return headers
+
+    @staticmethod
+    def getquerydata():
+        data = dict()
+        with open('./Data') as fileheader:
+            for line in fileheader:
+                if line.startswith('#'):
+                    pass
+                else:
+                    (key, val) = line.replace('\n', '').split('=')
+                    data[key] = val
+        return data
 
     @staticmethod
     def writednsstatustofile(strdns, statusdns):
